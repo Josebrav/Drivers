@@ -1,0 +1,18 @@
+
+body {
+    background-image: url('../../assets/Pictures/f1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.button{
+    display: flex;
+    padding-bottom: 400px;
+}
+.button button{
+    background-color: rgb(241, 21, 21);
+    color: black;
+    border: 3px solid rgb(63, 63, 63) ;
+    
+}
