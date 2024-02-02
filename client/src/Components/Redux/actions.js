@@ -5,7 +5,6 @@ import {
     FILTER_BY_NAME,
     FILTER_TEAM,
     GET_DRIVER_ID,
-    
 } from "./actions-types";
 import axios from "axios";
 
@@ -27,10 +26,6 @@ const filterName = (name) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/drivers/name?name=${name}`);
-            if (!data) {
-                // Mostrar alerta si no se encontraron resultados
-                alert("No existe");
-            }
             return dispatch({
                 type: FILTER_BY_NAME,
                 payload: data
@@ -77,16 +72,16 @@ const filterTeam = (selectedTeam) => {
 
 const getDriverId = (id) => {
     return async (dispatch) => {
-      try {
-        const {data} = await axios.get(`http://localhost:3001/drivers/${id}`);  
-        return dispatch({ type: GET_DRIVER_ID, payload: data });
-      } catch (error) {
-        throw Error(error.message);
-      }
+        try {
+            const { data } = await axios.get(`http://localhost:3001/drivers/${id}`);
+            return dispatch({ type: GET_DRIVER_ID, payload: data });
+        } catch (error) {
+            throw Error(error.message);
+        }
     };
-  };
+};
 
 
 
 
-export { filterAPIorDB, orderCards, getAllDrivers, filterName, filterTeam, getDriverId}
+export { filterAPIorDB, orderCards, getAllDrivers, filterName, filterTeam, getDriverId }

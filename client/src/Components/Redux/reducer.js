@@ -15,7 +15,6 @@ const initalState = {
 
 export default function reducer(state = initalState, action) {
     switch (action.type) {
-
         case GET_ALL_DRIVERS:
             return {
                 ...state,
@@ -81,11 +80,6 @@ export default function reducer(state = initalState, action) {
                 driver: action.payload,
             };
 
-        // case RESET_FILTER:
-        //     return {
-        //         ...state,
-        //         allDrivers:action.payload
-        //     }
         default: return state
     }
 }

@@ -16,6 +16,7 @@ export default function Form() {
         description: "",
         teams: []
     });
+
     const [teams, setTeams] = useState([]);
     const [errors, setErrors] = useState({});
     const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -46,7 +47,7 @@ export default function Form() {
                 const teamOptions = response.data.map((team) => ({ value: team, label: team }));
                 setTeams(teamOptions);
             } catch (error) {
-                console.log(error);
+                alert("No se pudieron cargar los teams")
             }
         };
 

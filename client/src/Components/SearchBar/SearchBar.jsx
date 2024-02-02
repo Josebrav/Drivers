@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { orderCards, filterAPIorDB, filterName, filterTeam, getAllDrivers } from "../Redux/actions";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import style from '../SearchBar/SearchBar.module.css'
+
 
 export default function SearchBar() {
     const [name, setName] = useState("");
@@ -60,8 +60,8 @@ export default function SearchBar() {
      }
 
     return (
-        <div className={style.searchBarContainer}>
-            <div className={style.buttonContainer}>
+        <div >
+            <div >
                 <Link to="/home">
                     <button>Home</button>
                 </Link>
@@ -70,7 +70,8 @@ export default function SearchBar() {
                     <button>Crear driver</button>
                 </Link>
             </div>
-            <div className={style.inputContainer}>
+            
+            <div >
             <input
                     type='search'
                     value={name}
