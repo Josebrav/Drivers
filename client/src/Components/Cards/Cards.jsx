@@ -1,7 +1,7 @@
 import Card from '../Card/Card';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import Pagination from '../Pagination/Pagination';
+
 import { format } from "date-fns"
 
 

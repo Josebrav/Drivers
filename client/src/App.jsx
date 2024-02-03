@@ -3,7 +3,6 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllDrivers } from './Components/Redux/actions';
 import Nav from './Components/Nav/Nav';
-import Landing from './Components/Landing/Landing';
 import Detail from './Components/Detail/Detail';
 import Cards from './Components/Cards/Cards';
 import Form from './Components/Form/Form';
@@ -24,12 +23,12 @@ function App() {
     <div>
       {pathname !== "/" && <Nav />}
       <Routes>
-        <Route path='/' element={<Landing />} />
+        
         <Route path='/home' element={<Cards />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/form' element={<Form />} />
       </Routes>
-    </div>
+    </div> 
   )
 }
 

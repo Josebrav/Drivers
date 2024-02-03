@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from '../Form/Form.module.css';
+
 import validation from '../Form/validation';
 import axios from "axios";
 import Select from "react-select";
@@ -59,76 +59,76 @@ export default function Form() {
         setSubmitDisabled(hasErrors);
     }, [errors]);
     return (
-        <div className={styles.container}>
+        <div >
             <form onSubmit={handleSubmit}>
-                <label className={styles.label}>Nombre: </label>
+                <label >Nombre: </label>
                 <input
                     type="text"
                     onChange={handleChange}
                     name="forename"
-                    className={styles.input}
+                    
                     placeholder="Ingrese el nombre"
                 />
                 {errors.forename1 ? <p>{errors.forename1}</p> :
                     errors.forename2 ? <p>{errors.forename2}</p> :
                     errors.forename3 ? <p>{errors.forename3}</p>: null}
 
-                <label className={styles.label}>Apellido: </label>
+                <label >Apellido: </label>
                 <input
                     type="text"
                     onChange={handleChange}
                     name="surname"
-                    className={styles.input}
+                    
                     placeholder="Ingrese el apellido"
                 />
                 {errors.surname1 ? <p>{errors.surname1}</p> :
                     errors.surname2 ? <p>{errors.surname2}</p> :
                     errors.surname3 ? <p>{errors.surname3}</p>: null}
 
-                <label className={styles.label}>Nacionalidad:</label>
+                <label >Nacionalidad:</label>
                 <input
                     type="text"
                     onChange={handleChange}
                     name="nationality"
-                    className={styles.input}
+                    
                     placeholder="Ingrese la nacionalidad"
                 />
                 {errors.nationality1 ? <p>{errors.nationality1}</p> :
                     errors.nationality2 ? <p>{errors.nationality2}</p> :
                     errors.nationality3 ? <p>{errors.nationality3}</p>: null}
 
-                <label className={styles.label}>Imagen: </label>
+                <label >Imagen: </label>
                 <input
                     type="text"
                     onChange={handleChange}
                     name="image"
-                    className={styles.input}
+                   
                     placeholder="Ingrese la url de la imagen"
                 />
                 {errors.image1 ? <p>{errors.image1}</p> : null}
 
-                <label className={styles.label}>Fecha de nacimiento: </label>
+                <label >Fecha de nacimiento: </label>
                 <input
                     type="date"
                     onChange={handleChange}
                     name="dob"
-                    className={styles.input}
+                    
                     placeholder="Ingrese la fecha de nacimiento"
                 />
                 {errors.dob1 ? <p>{errors.dob1}</p> : null}
 
-                <label className={styles.label}>Descripción: </label>
+                <label >Descripción: </label>
                 <input
                     type="text"
                     onChange={handleChange}
                     name="description"
-                    className={styles.input}
+                   
                     placeholder="Ingrese una descripción del driver"
                 />
                 {errors.description1 ? <p>{errors.description1}</p> :
                     errors.description2 ? <p>{errors.description2}</p> : null}
 
-                <label className={styles.label}>Teams: </label>
+                <label >Teams: </label>
                 <Select
                     isMulti
                     options={teams}

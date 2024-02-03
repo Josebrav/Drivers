@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { orderCards, filterAPIorDB, filterName, filterTeam, getAllDrivers } from "../Redux/actions";
 import { useDispatch } from "react-redux";
+import { Box, Button, Input, Select } from '@chakra-ui/react';
 import axios from "axios";
 
 
@@ -59,53 +60,64 @@ export default function SearchBar() {
          dispatch(getAllDrivers())
      }
 
-    return (
-        <div >
-            <div >
+     return (
+        
+            <Box display="flex" bg="red" padding="4" alignItems="center">
+              <Box>
                 <Link to="/home">
-                    <button>Home</button>
+                  <Button colorScheme="teal" mr="4">
+                    Home
+                  </Button>
                 </Link>
-
+          
                 <Link to="/form">
-                    <button>Crear driver</button>
+                  <Button colorScheme="teal">Crear driver</Button>
                 </Link>
-            </div>
-            
-            <div >
-            <input
-                    type='search'
-                    value={name}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Buscar driver por nombre"
+              </Box>
+          
+              <Box ml="4">
+                <Input
+                  type="search"
+                  value={name}
+                  onChange={handleChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Buscar driver por nombre"
+                  variant="filled"
                 />
-
-            </div>
-
-            <label>Ordenar por:</label>
-            <select name="filterAPIorDB" id="filterAPIorDB" onChange={handleFilterAPIorDB}>
-                <option value="ALL">Traer todos</option>
-                <option value="DB">Drivers DB</option>
-                <option value="API">Drivers API</option>
-            </select>
-
-
-            <select name="order" id="order" onChange={handleOrder}>
-                <option value="A">A-Z</option>
-                <option value="D">Z-A</option>
-                <option value="Dob">Fecha de nacimiento</option>
-            </select>
-
-
-            <select name="teamFilter" id="teamFilter" onChange={handleTeamChange} value={team}>
-                {teams.map((teamOption, index) => (
+              </Box>
+          
+              <Box ml="4">
+                <label>Ordenar por:</label>
+                <Select name="filterAPIorDB" id="filterAPIorDB" onChange={handleFilterAPIorDB} variant="filled">
+                  <option value="ALL">Traer todos</option>
+                  <option value="DB">Drivers DB</option>
+                  <option value="API">Drivers API</option>
+                </Select>
+              </Box>
+          
+              <Box ml="4">
+                <Select name="order" id="order" onChange={handleOrder} variant="filled">
+                  <option value="A">A-Z</option>
+                  <option value="D">Z-A</option>
+                  <option value="Dob">Fecha de nacimiento</option>
+                </Select>
+              </Box>
+          
+              <Box ml="4">
+                <Select name="teamFilter" id="teamFilter" onChange={handleTeamChange} value={team} variant="filled">
+                  {teams.map((teamOption, index) => (
                     <option key={index} value={teamOption}>
-                        {teamOption}
+                      {teamOption}
                     </option>
-                ))}
-            </select>
-
-            <button onClick={()=>{handleResetFilters()}}>Reset filters</button>
-        </div>
-    )
+                  ))}
+                </Select>
+              </Box>
+          
+              <Box ml="4">
+                <Button onClick={() => handleResetFilters()} colorScheme="teal">
+                  Reset filters
+                </Button>
+              </Box>
+            </Box>
+      );
 }
