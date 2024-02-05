@@ -13,7 +13,13 @@ const getTeams = async (req, res) => {
             const setDataTeams = Array.from(new Set(dataTeamSinEsp));
             const teamsDataBase = setDataTeams.map(team => ({ name: team }));
 
-            await Teams.bulkCreate(teamsDataBase);
+            for (const teamData of teamsDataBase) {
+                const existingTeam = await Teams.findOne({ where: { name: teamData.name } });
+                if (!existingTeam) {
+                    await Teams.create(teamData);
+                }
+            }
+
             teamsInitialized = true; 
         }
 

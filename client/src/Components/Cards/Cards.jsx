@@ -1,62 +1,97 @@
-import Card from '../Card/Card';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
-
-import { format } from "date-fns"
-
+import { format } from 'date-fns';
+import { Box, Button, Flex } from '@chakra-ui/react';
+import Carta from '../Card/Card';
 
 export default function Cards() {
+  const allDrivers = useSelector((state) => state.allDrivers);
+  const [currentPage, setCurrentPage] = useState(1);
+  const driversPerPage = 6;
 
-    const allDrivers = useSelector((state) => state.allDrivers);
+  const totalDrivers = allDrivers.length;
+  const totalPages = Math.ceil(totalDrivers / driversPerPage);
 
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const driversPerPage = 9;
+  const [driversToShow, setDriversToShow] = useState([]);
 
-    // const lastIndex = currentPage * driversPerPage;
-    // const firstIndex = lastIndex - driversPerPage;
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * driversPerPage;
+    const endIndex = startIndex + driversPerPage;
+    setDriversToShow(allDrivers.slice(startIndex, endIndex));
+  }, [allDrivers, currentPage]);
 
-    
-    // // 
-    // const pagesToShow = 5; 
+  const prevHandler = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
 
+  const nextHandler = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
 
-    // let startPage = Math.max(1, currentPage - Math.floor(pagesToShow / 2));
-    // let endPage = startPage + pagesToShow - 1;
-    // console.log(currentPage)
+  return (
+    <div>
+      <div>
+        <Box display={"flex"} flexWrap={"wrap"} ml={"80px"}>
+        {driversToShow.map(({ id, surname, name, image, teams, dob }) => {
+          return (
+            <Carta
+              key={id}
+              id={id}
+              name={name?.surname || surname}
+              image={image?.url || image}
+              teams={teams}
+              dob={dob && format(new Date(dob), 'dd/MM/yyyy')}
+            />
+          );
+        })}
+        </Box>
+        <Flex
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="row"
+          bgColor="gray.300"
+          width={{ base: '100%', md: '2xl', lg: '100%' }}
+          h="100%"
+          borderBottomLeftRadius="md"
+          borderBottomRightRadius="md"
+          border="1px solid black"
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="1rem"
+            marginBottom="1rem"
+          >
+            <Button
+              color="black"
+              bgColor="#009ED1"
+              variant="outline"
+              colorScheme="teal"
+              onClick={prevHandler}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </Button>
 
-    // if(currentPage < 1){
-    //     setCurrentPage(1)
-    // }
-    // console.log(currentPage > endPage)
-    //     console.log(endPage)
-    return (
-        <div>
-            {/* <div>
-                <Pagination
-                    driversPerPage={driversPerPage}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    totalDrivers={allDrivers.length}
-                />
-            </div> */}
-            <div >
+            <Box as="span" marginLeft="1rem" marginRight="1rem" color={"white"}>
+              Página {currentPage} de {totalPages}
+            </Box>
 
-
-                {allDrivers.map(({ id, surname, name, image, teams, dob }) => {
-                    return <Card
-                        id={id && id}
-                        key={id && id}
-                        name={name?.surname && name?.surname || surname && surname}
-                        image={image.url && image.url || image && image}
-                        teams={teams && teams}
-                        dob={dob && format(new Date(dob), "dd/MM/yyyy")}
-                    />
-                })
-                // .slice(firstIndex, lastIndex)
-                }
-
-            </div>
-        </div>
-    )
-
+            <Button
+              color="black"
+              bgColor="#009ED1"
+              variant="outline"
+              colorScheme="teal"
+              onClick={nextHandler}
+              disabled={currentPage === totalPages}
+            >
+              Siguiente
+            </Button>
+          </Box>
+        </Flex>
+      </div>
+    </div>
+  );
 }

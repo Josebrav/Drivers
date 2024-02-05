@@ -4,9 +4,11 @@ import { useDispatch } from 'react-redux';
 import { getAllDrivers } from './Components/Redux/actions';
 import Nav from './Components/Nav/Nav';
 import Detail from './Components/Detail/Detail';
-import Cards from './Components/Cards/Cards';
+import Carta from './Components/Cards/Cards';
 import Form from './Components/Form/Form';
-import './App.css';
+import { Container, Box } from '@chakra-ui/react';
+import image from "../src/assets/fondo.png"
+
 
 function App() {
 
@@ -20,15 +22,24 @@ function App() {
 
 
   return (
-    <div>
-      {pathname !== "/" && <Nav />}
+    <Container 
+    bgImage={image}
+    bgSize="cover"
+    bgAttachment={"fixed"}
+    
+    mt={0}
+    p={0}
+    >
+    
+    
+      <Nav/>
       <Routes>
-        
-        <Route path='/home' element={<Cards />} />
+      
+        <Route path='/' element={<Carta />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/form' element={<Form />} />
       </Routes>
-    </div> 
+    </Container> 
   )
 }
 

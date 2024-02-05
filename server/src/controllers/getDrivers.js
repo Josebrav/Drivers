@@ -18,6 +18,7 @@ const getDrivers = async (req, res) => {
       ],
     });
     const driversDBArray = Object.values(driversDB)
+    
 
     const driversMap = driversDBArray.map((driver) => {
       return {

@@ -1,13 +1,14 @@
+const { Model } = require('sequelize');
 const { Driver, Teams } = require('../db');
-const { Op } = require('sequelize')
+const {Op} = require('sequelize')
 
 const postDriver = async (req, res) => {
     try {
-
+        
         const { forename, surname, image, description, dob, nationality, teams } = req.body;
+        
 
-
-        if (!forename || !surname || !description || !image || !dob || !nationality) {
+        if (!forename || !surname || !description || !image || !dob || !nationality ) {
             return res.status(400).send("Faltan datos");
         }
 
@@ -18,12 +19,12 @@ const postDriver = async (req, res) => {
             description,
             nationality,
             dob
-        });
-        if (teams && teams.length > 0) {
+          });
+          if (teams && teams.length > 0) {
             const searchTeam = await Teams.findAll({
-                where: { name: { [Op.in]: teams } },
+              where: { name: { [Op.in]: teams } },
             });
-            await newDriver.addTeams(searchTeam);
+             await newDriver.addTeams(searchTeam);
         }
         return res.status(200).json(newDriver);
     } catch (error) {
