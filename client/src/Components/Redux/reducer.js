@@ -7,20 +7,19 @@ import {
     GET_DRIVER_ID
 } from "./actions-types";
 
-const initalState = {
+const initialState = {
     allDrivers: [],
     allCharacters: [],
     driver: []
 };
 
-export default function reducer(state = initalState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_DRIVERS:
             return {
                 ...state,
                 allDrivers: action.payload,
                 allCharacters: action.payload,
-                
             };
 
         case FILTER_BY_NAME:
@@ -47,32 +46,25 @@ export default function reducer(state = initalState, action) {
             return {
                 ...state,
                 allDrivers: action.payload
-
             }
-
 
         case FILTER_API_OR_DB:
+            
+            let filteredDrivers = [...state.allDrivers];
+
             switch (action.payload) {
-                case "ALL":
-                    return {
-                        ...state,
-                        allDrivers: state.allCharacters,
-                    };
                 case "DB":
-                    return {
-                        ...state,
-                        allDrivers: state.allCharacters.filter(
-                            (driver) => driver.created
-                        ),
-                    };
+                    filteredDrivers = filteredDrivers.filter((driver) => driver.created);
+                    break;
                 case "API":
-                    return {
-                        ...state,
-                        allDrivers: state.allCharacters.filter(
-                            (driver) => !driver.created
-                        ),
-                    };
+                    filteredDrivers = filteredDrivers.filter((driver) => !driver.created);
+                    break;
             }
+
+            return {
+                ...state,
+                allDrivers: filteredDrivers
+            };
 
         case GET_DRIVER_ID:
             return {
@@ -80,6 +72,7 @@ export default function reducer(state = initalState, action) {
                 driver: action.payload,
             };
 
-        default: return state
+        default:
+            return state;
     }
 }

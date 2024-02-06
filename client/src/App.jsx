@@ -26,7 +26,7 @@ function App() {
     bgImage={image}
     bgSize="cover"
     bgAttachment={"fixed"}
-    
+    h={pathname != "/" ? "130vh" : undefined}
     mt={0}
     p={0}
     >
