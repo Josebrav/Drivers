@@ -42,11 +42,19 @@ export default function reducer(state = initialState, action) {
                 allDrivers: orderCopy
             };
 
-        case FILTER_TEAM:
-            return {
-                ...state,
-                allDrivers: action.payload
-            }
+            case FILTER_TEAM:
+                console.log(action.payload);
+                const teamFilter = action.payload;
+                
+                const filteredDriversByTeam = state.allDrivers.filter((driver) => {
+                   
+                        return driver.teams.includes(teamFilter);
+                });
+            console.log(filteredDriversByTeam);
+                return {
+                    ...state,
+                    allDrivers: filteredDriversByTeam,
+                };
 
         case FILTER_API_OR_DB:
             

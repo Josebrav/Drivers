@@ -50,25 +50,32 @@ const orderCards = (order) => {
     }
 };
 
-const filterTeam = (selectedTeam) => {
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get('http://localhost:3001/drivers');
-            const driversTeam = data.filter((driv) => {
-                if (driv.teams) {
-                    return driv.teams.includes(selectedTeam)
-                }
-            });
-            return dispatch({
-                type: FILTER_TEAM,
-                payload: driversTeam
-            })
-        } catch (error) {
-            throw Error(error.message);
-        }
 
+// const filterTeam = (selectedTeam) => {
+//     return async (dispatch) => {
+//         try {
+//             const { data } = await axios.get('http://localhost:3001/drivers');
+//             const driversTeam = data.filter((driv) => {
+//                 if (driv.teams) {
+//                     return driv.teams.includes(selectedTeam)
+//                 }
+//             });
+//             return dispatch({
+//                 type: FILTER_TEAM,
+//                 payload: driversTeam
+//             })
+//         } catch (error) {
+//             throw Error(error.message);
+//         }
+
+//     }
+// }
+
+const filterTeam = (selectedTeam) => {
+    return {
+        type: FILTER_TEAM, payload: selectedTeam
     }
-}
+};
 
 const getDriverId = (id) => {
     return async (dispatch) => {
