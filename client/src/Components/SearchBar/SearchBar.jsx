@@ -108,7 +108,7 @@ export default function SearchBar() {
       </Box>
 
       <Box mr={"15px"}>
-        <Select name="teamFilter"  id="teamFilter" borderRadius={"15px"} onChange={handleTeamChange} value={team} variant="filled">
+        <Select name="teamFilter" placeholder="Buscar por Team" id="teamFilter" borderRadius={"15px"} onChange={handleTeamChange} value={team} variant="filled">
           {teams.map((teamOption, index) => (
             <option key={index} value={teamOption}>
               {teamOption}

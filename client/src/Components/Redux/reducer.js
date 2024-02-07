@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action) {
                 console.log(action.payload);
                 const teamFilter = action.payload;
                 
-                const filteredDriversByTeam = state.allDrivers.filter((driver) => {
+                const filteredDriversByTeam = [...state.allDrivers].filter((driver) => {
                    
                         return driver.teams.includes(teamFilter);
                 });
